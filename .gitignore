@@ -40,3 +40,4 @@ vendor/
 # composer.lock
 
 composer.lock
+/.eslintcache

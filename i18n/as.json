@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Dibya Dutta"
+			"Dibya Dutta",
+			"Simbu123"
 		]
 	},
-	"relatedarticles-read-more-heading": "সম্পৰ্কীত প্ৰৱন্ধবোৰ"
+	"relatedarticles-desc": "ফুটাৰত সম্পৰ্কিত পৃষ্ঠাসমূহৰ লিংক যোগ কৰে",
+	"relatedarticles-read-more-heading": "সম্পৰ্কিত পৃষ্ঠাসমূহ"
 }

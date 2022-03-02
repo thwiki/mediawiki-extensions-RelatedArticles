@@ -69,28 +69,12 @@
 		var parameters = {
 				action: 'query',
 				formatversion: 2,
-				prop: 'pageimages',
+				prop: 'pageimages|pagedesc',
 				piprop: 'thumbnail',
 				pithumbsize: 160 // FIXME: Revert to 80 once pithumbmode is implemented
 			},
 			// Enforce limit
 			relatedPages = this.editorCuratedPages.slice( 0, limit );
-
-		switch ( this.descriptionSource ) {
-			case 'wikidata':
-				parameters.prop += '|description';
-				break;
-			case 'textextracts':
-				parameters.prop += '|extracts';
-				parameters.exsentences = '1';
-				parameters.exintro = '1';
-				parameters.explaintext = '1';
-				break;
-			case 'pagedescription':
-				parameters.prop += '|pageprops';
-				parameters.ppprop = 'description';
-				break;
-		}
 
 		if ( relatedPages.length ) {
 			parameters.pilimit = relatedPages.length;
@@ -102,7 +86,14 @@
 
 			parameters.generator = 'search';
 			parameters.gsrsearch = 'morelike:' + this.currentPage;
-			parameters.gsrnamespace = '0';
+
+			var namespaces = mw.config.get('wgContentNamespaces');
+			if ( namespaces == null ) {
+				parameters.gsrnamespace = '0';
+			} else {
+				parameters.gsrnamespace = namespaces.join(',');
+			}
+
 			parameters.gsrlimit = limit;
 			parameters.gsrqiprofile = 'classic_noboostlinks';
 

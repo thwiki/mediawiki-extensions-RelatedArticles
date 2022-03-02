@@ -100,11 +100,12 @@ class Hooks {
 	 * @return bool Always <code>true</code>
 	 */
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
+		global $wgContentNamespaces;
 		$title = $out->getContext()->getTitle();
 		$action = $out->getRequest()->getText( 'action', 'view' );
 
 		if (
-			$title->inNamespace( NS_MAIN ) &&
+			$title->inNamespaces( $wgContentNamespaces ) &&
 			// T120735
 			$action === 'view' &&
 			!$title->isMainPage() &&

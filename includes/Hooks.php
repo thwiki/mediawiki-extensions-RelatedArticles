@@ -85,10 +85,11 @@ class Hooks {
 	 * @return bool
 	 */
 	private static function hasRelatedArticles( Skin $skin ): bool {
+		$contentNamespaces = MediaWikiServices::getInstance()->getNamespaceInfo()->getContentNamespaces();
 		$out = $skin->getOutput();
 		$title = $out->getContext()->getTitle();
 		$action = $out->getRequest()->getText( 'action', 'view' );
-		return $title->inNamespace( NS_MAIN ) &&
+		return $title->inNamespaces( $contentNamespaces ) &&
 			// T120735
 			$action === 'view' &&
 			!$title->isMainPage() &&
